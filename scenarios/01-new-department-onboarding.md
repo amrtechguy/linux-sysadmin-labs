@@ -29,7 +29,43 @@ The IT department at **GlobalTech Solutions Inc.**, a multinational technology c
 
 ## 🧪 My Solution
 
-### ✅ Step 1:
+
+### ✅ step 1: Create the groups
+```
+gorupadd devops
+gorupadd cloud
+gorupadd security
+gorupadd infra
+gorupadd junior
+```
+
+### ✅ Step 2: Create the user accounts with required options
+```
+useradd -m -s "/bin/bash" -G devops aarav_malhotra
+echo "[$(date +'%F %T')] Action: created user 'aarav_malhotra' - success" >> /var/log/onboarding.log
+passwd aarav_malhotra
+echo "[$(date +'%F %T')] Action: Set password for 'aarav_malhotra' - success" >> /var/log/onboarding.log
+chage -d 0 aarav_malhotra
+echo "[$(date +'%F %T')] Action: Added aarav_malhotra to group '' - success" >> /var/log/onboarding.log
+
+useradd -m -s "/bin/bash" -G cloud yasmin_hassan
+passwd yasmin_hassan
+chage -d 0 yasmin_hassan
+
+useradd -m -s "/bin/bash" -G security tariq_mansour
+passwd tariq_mansour
+chage -d 0 tariq_mansour
+
+useradd -m -s "/bin/bash" -G infra emi_takahashi
+passwd emi_takahashi
+chage -d 0 emi_takahashi
+
+useradd -m -s "/bin/bash" -G junior lucas_martins
+passwd lucas_martins
+chage -d 0 lucas_martins
+chage -E $(date -d '+90 days' +%F)
+```
+
 
 ---
 
