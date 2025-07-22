@@ -1,35 +1,27 @@
-## 🧩 Scenario: Onboard a New User with Proper Access and Shell Configuration
+# 🧪 Scenario 01 - Bulk User Onboarding
 
-> A new employee named `fatma` has joined the engineering team. She needs a user account with a strong password, assigned to the `engineers` group, given a secure default shell (`/bin/bash`), and appropriate home directory setup. Her account should also be configured with an expiry date after her internship ends (90 days from today).
+## 🧭 Context
+The HR department provides a CSV file (`new_users.csv`) every week with new employees. You need to create user accounts in bulk based on this file and assign them to the correct departments.
 
----
-
-### ✅ Task
-
-* Create and configure the user account `fatma` with all required settings, group assignment, shell, and expiry.
-
----
-
-### 🛠️ Solution
-
-<!-- Leave this section empty for now -->
-
-<!-- You’ll insert your own commands and steps here once you complete the lab -->
+## 🛠️ Tasks
+1. Create users based on the CSV (`username,fullname,department`).
+2. Assign each user to a group that matches their department name.
+3. Create home directories with proper permissions.
+4. Set a temporary password and force password change on first login.
+5. Log all actions in `/var/log/user_onboarding.log`.
 
 ---
 
-### 📘 What I Learned
+## 🧪 My Solution
 
-<!-- Fill this out with key lessons after solving the task -->
-
+### ✅ Step 1: Reviewed the CSV
+```csv
+alice, Alice Johnson, marketing
+bob, Bob Smith, engineering
+charlie, Charlie Ray, hr
+```
 ---
 
-### 🏷️ Tags
-
-`#user-management` `#linux-users` `#account-setup` `#permissions`
-
----
-
-### 🧠 Notes (Optional)
-
-<!-- Add any unexpected behavior, extra tools used, or reference links -->
+## 📝 My Notes:
+- Used chage -d 0 to force password change.
+- Might add error handling in v2.
