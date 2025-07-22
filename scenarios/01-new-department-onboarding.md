@@ -73,3 +73,8 @@ chage -E $(date -d '+90 days' +%F)
 
 ---
 
+## 🔁 Automating the solution:
+
+
+
+
