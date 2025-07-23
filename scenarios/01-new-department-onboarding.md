@@ -126,8 +126,8 @@ echo "[$(date +'%F %T')] Action: changed the account expiration date of 'lucas_m
 - Used the tools: `useradd`, `passwd`, `chage`, `date`, `tee`.
 - Used a single command to create an account with home directory, default shell, and supplementary group `sudo useradd -m -s "/bin/bash" -G junior lucas_martins`.
 - Used `&&` to make sure the previous command is executed successfully or the next one will not execute. This way I make sure that the log will be appended only if the command was executed successfully.
-- Used `\` to tell the sheel that the rest of the command is on the next line.
-- Used `tee -a` to append to the log file that requires a root permission. Tryed `sudo echo "..." >> /var/log/onboarding.log`, but it didn't work because the sudo will apply only to the `echo` not the redirection `>>`. Also, found that the shell applies the stream redirection `>>` before executing the `echo`, so using `tee -a` allowed me to echo the log text and append it to the log file and also print it to the standard output after the appending is done.
+- Used `\` to tell the shell that the rest of the command is on the next line.
+- Used `tee -a` to append to the log file that requires a root permission. Tryed `sudo echo "..." >> /var/log/onboarding.log`, but it didn't work because the `sudo` will apply only to the `echo` not the redirection `>>`. Also, found that the shell applies the stream redirection `>>` before executing the `echo`, so using `tee -a` allowed me to echo the log text and append it to the log file and also print it to the standard output after the appending is done.
 - Used `chage -d 0` to set the account's password creation date to 0 which is old and even before the '1970-01-01' when the epoch time stars. I think that triggers the system to force the user to change the password, because it's too old.
 ---
 
