@@ -1,0 +1,12 @@
+# comment
+user        		amr # user name
+pgroup      	amr # primary group
+sgroups     	test1,test2,tes3 # supplementary groups
+comment     	"Amr Hassan" # comment
+shell      		/bin/bash # shell path
+cdate       	2025-07-26 # create date
+mndays      	3 # minimum days
+mxdays      	99999 # max days
+wdays       	0 # warning days
+idays       		0 # inactive days
+xdate       		2025-09-26 # expiry date
