@@ -1,0 +1,133 @@
+# command arguments
+$ ./users-manager.sh users.txt
+> only one argument required which is a text file.
+
+## check the argument `$1` only.
+> if missing, display `Error: file is missing as an argument.`  and exit by 1
+
+> if set,
+
+> 1. check it's exist and a regular file. 
+>> a. on false, display `Error: file is missing or not a regular file.` and exit by 1
+
+> 2. check it's not empty. 
+>> a. on false, display `Error: the file is empty.`  and exit by 1
+
+> 3. check if it is readable?
+> if no, display `Error: the file is not readable by the user '$USER'.`  and exit by 1
+
+## read the file.
+
+> loop on each line and track the line numer in a variable `line_number`
+
+> if `blank`, then ignore it.
+
+# user
+> if next line after a blank line matches `user:[a-zA-Z0-9_-]`
+>> on error, display `Error: \n\tfile: '$1' \n\tline: '$line_number' \n\tmessage: user block must start with 'user:[a-zA-Z0-9_-]'.`, exit with 1.
+>> on success,
+>>> store the username in variable `user_name` that changes with every new user to track the current one.
+>>> need to track each field duplicates in this user block and stop when duplicates found.
+>>>> declare a variable for each field type like `f_name_hit=0`
+>>>> check it with every new hit to make sure it's not a duplicate
+>>>> after hitting a new blank line or EOF, reset all values to 0
+>>> get the value of user field.
+>>> add user if not exists with default options
+>>> `log` [] [ok] new user 'name' created.
+
+[2025-07-20 13:30:45] [INFO] CREATE - User '' created.
+[2025-07-20 13:30:46] [WARNING] SKIP - User '' already exists.
+[2025-07-20 13:30:47] [ERROR] CREATE - Failed to create user ''.
+
+# pgroup
+> if next line matches `pgroup:[a-zA-Z0-9_-]`
+>> store the value in variable `pgroup`.
+>> if not exists, then create the group.
+>> modify user's primary group to it.
+
+[2025-07-20 13:30:45] [INFO] CREATE - Group '' created.
+[2025-07-20 13:30:46] [WARNING] SKIP - Group '' already exists.
+[2025-07-20 13:30:47] [ERROR] CREATE - Failed to create group ''.
+[2025-07-20 13:30:47] [ERROR] UPDATE - Failed to add group '' to user '' as primary group.
+
+# sgroups
+> if next line matches `sgroups:[a-zA-Z0-9_-,]`
+>> remove the current user's supplementary groups.
+>> split the value on ',' and store the items in an array `sgroups`
+>> loop on the array and:
+>>> create the group if not exists
+>>> append it to the user
+
+[2025-07-20 13:30:45] [INFO] CREATE - Group '' created.
+[2025-07-20 13:30:46] [WARNING] SKIP - Group '' already exists.
+[2025-07-20 13:30:47] [ERROR] CREATE - Failed to create group ''.
+[2025-07-20 13:30:47] [ERROR] UPDATE - Failed to add group '' to user '' as a supplementary group.
+
+# comment
+> if next line matches `comment:^".?"$`
+>> store the value in variable `comment`.
+>> modify user's comment.
+
+[2025-07-20 13:30:45] [INFO] UPDATE - Comment '' added to user ''.
+[2025-07-20 13:30:47] [ERROR] UPDATE - Failed to add comment '' to user ''.
+
+# shell
+> if next line matches `shell:^/.+`
+>> store the value in variable `shell_path`.
+>> check if it's exists and an executable file
+>> modify user's shell.
+
+[2025-07-20 13:30:45] [INFO] UPDATE - Shell '' added to user ''.
+[2025-07-20 13:30:47] [ERROR] UPDATE - Failed to add shell '' to user ''.
+
+# cdate
+> if next line matches `cdate:[0000-00-00]`
+>> store the value in variable `cdate`.
+>> modify user's create date.
+
+[2025-07-20 13:30:45] [INFO] UPDATE - Create date '' added to user ''.
+[2025-07-20 13:30:47] [ERROR] UPDATE - Failed to add create date '' to user ''.
+
+# mndays
+> if next line matches `mndays:[+-int]`
+>> store the value in variable `mindays`.
+>> modify password's min days.
+
+[2025-07-20 13:30:45] [INFO] UPDATE - Password minimum days '' added to user ''.
+[2025-07-20 13:30:47] [ERROR] UPDATE - Failed to add password minimum days '' to user ''.
+
+# mxdays
+> if next line matches `mxdays:[+-int]`
+>> store the value in variable `maxdays`.
+>> modify password's max days.
+
+[2025-07-20 13:30:45] [INFO] UPDATE - Password maximum days '' added to user ''.
+[2025-07-20 13:30:47] [ERROR] UPDATE - Failed to add password maximum days '' to user ''.
+
+# wdays
+> if next line matches `wdays:[+-int]`
+>> store the value in variable `wdays`.
+>> modify password's warning days.
+
+[2025-07-20 13:30:45] [INFO] UPDATE - Password expiry warning days '' added to user ''.
+[2025-07-20 13:30:47] [ERROR] UPDATE - Failed to add password expiry warning days '' to user ''.
+
+# idays
+> if next line matches `idays:[+-int]`
+>> store the value in variable `idays`.
+>> modify password's inactive days.
+
+[2025-07-20 13:30:45] [INFO] UPDATE - Account inactive days '' added to user ''.
+[2025-07-20 13:30:47] [ERROR] UPDATE - Failed to add Account inactive days '' to user ''.
+
+# xdate
+> if next line matches `xdate:[0000-00-00]`
+>> store the value in variable `xdate`.
+>> modify user's expire date.
+
+[2025-07-20 13:30:45] [INFO] UPDATE - Account expiry date '' added to user ''.
+[2025-07-20 13:30:47] [ERROR] UPDATE - Failed to add account expiry date '' to user ''.
+
+# ...
+> if no match with any previous record
+>> display `Error: \n\tfile: '$1' \n\tline: '$line_number' \n\tmessage: this line is not valid. check for mistakes.`, exit with 1.
