@@ -1,6 +1,0 @@
-aarav_malhotra:devops
-yasmin_hassan:cloud
-tariq_mansour:security
-emi_takahashi:infra
-lucas_martins:junior
-

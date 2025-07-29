@@ -1,1 +1,0 @@
-# linux System Administration Scenarios
