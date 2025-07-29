@@ -1,4 +1,4 @@
-# 🧑‍💻 Scenario 01: New Department Onboarding (Global Team Expansion)
+# 🧑‍💻 Lab: New Department Onboarding (Global Team Expansion)
 
 ## 🌍 Background
 
